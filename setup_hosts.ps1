@@ -1,3 +1,28 @@
+# 管理者権限を確認中...
+Write-Host "Checking for Administrator privileges..."
+
+# 管理者権限があるかを確認
+if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    Write-Host "Error: This script requires running as Administrator." -ForegroundColor Red
+    exit 1
+} else {
+    Write-Host "Administrator privileges confirmed." -ForegroundColor Green
+}
+
+# hostsファイルへの書き込み権限を確認中...
+Write-Host "Checking write access to the hosts file..."
+
+# hostsファイルへの書き込み権限を確認
+$hostsFile = "C:\Windows\System32\drivers\etc\hosts"
+try {
+    $stream = [System.IO.File]::OpenWrite($hostsFile)
+    $stream.Close()
+    Write-Host "Write access to the hosts file confirmed." -ForegroundColor Green
+} catch {
+    Write-Host "Error: No write access to the hosts file." -ForegroundColor Red
+    exit 1
+}
+
 # hostctlのプロファイル設定ファイルが管理されているディレクトリへの、プロジェクトルートからの相対パス
 $EtcHostsDir = ".\hostctl-profiles"
 # 設定ファイルディレクトリが存在しない場合、エラーメッセージを表示して終了
@@ -13,7 +38,12 @@ Get-ChildItem -Path $EtcHostsDir -File | ForEach-Object {
     Write-Host "Creating profile '$ProfileName' from $FilePath..."
     try {
         & hostctl add $ProfileName --from $FilePath
-        Write-Host "Profile '$ProfileName' created successfully." -ForegroundColor Green
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "Profile '$ProfileName' created successfully." -ForegroundColor Green
+        } else {
+            Write-Host "Error: Failed to create profile '$ProfileName'." -ForegroundColor Red
+            exit 1
+        }
     } catch {
         Write-Host "Error: Failed to create profile '$ProfileName'." -ForegroundColor Red
         exit 1
