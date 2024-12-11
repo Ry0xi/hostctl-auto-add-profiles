@@ -22,7 +22,7 @@ scoop install hostctl
 他の方法でインストールしたい場合は、公式ドキュメントを参照してください。
 [hostctl公式ドキュメント](https://guumaster.github.io/hostctl/docs/installation/)
 
-## 使い方
+## プロファイルの自動登録
 
 コマンドを実行する前に、ホスト名の設定ファイルを用意してください。
 
@@ -50,3 +50,33 @@ scoop install hostctl
 > スクリプトを実行する前に、PowerShellのスクリプト実行ポリシーを変更する必要がある場合があります。
 > その場合は、 `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned` を実行します。
 
+## プロファイルの有効化・無効化など基本的なhostctlの操作方法
+
+hostctlの基本的な操作方法は、[公式ドキュメント](https://guumaster.github.io/hostctl/docs/getting-started/)を参照してください。
+
+> [!NOTE]
+> hostctlの操作には`sudo`や管理者権限が必要です。
+
+### プロファイルの一覧表示
+
+現在のプロファイルを一覧表示するには、以下のコマンドを使用します。
+
+```bash
+hostctl list
+```
+
+### プロファイルの無効化
+
+特定のプロファイルを無効化するには、以下のコマンドを使用します。
+
+```bash
+hostctl disable <profile_name>
+```
+
+### プロファイルの有効化
+
+特定のプロファイルを有効化するには、以下のコマンドを使用します。
+
+```bash
+hostctl enable <profile_name>
+```
