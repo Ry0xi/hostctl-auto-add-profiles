@@ -36,6 +36,20 @@ scoop install hostctl
 127.0.0.2 my-localhost-2
 ```
 
+### hostsファイルのバックアップ
+
+`hosts`ファイルを書き換える前に、必ずバックアップを取ってください。例として、以下のコマンドを使用してバックアップを作成できます。
+
+#### Linux/macOS
+```bash
+cp /etc/hosts /etc/hosts.backup
+```
+
+#### Windows
+```powershell
+Copy-Item -Path "C:\Windows\System32\drivers\etc\hosts" -Destination "C:\Windows\System32\drivers\etc\hosts.backup"
+```
+
 ### Linux/macOS の場合
 
 1. 任意のシェルを起動して、スクリプトがあるディレクトリに移動する
