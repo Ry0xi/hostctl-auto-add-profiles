@@ -1,12 +1,26 @@
 # hostctlのプロファイル自動設定スクリプト
 
-## 事前準備
+このプロジェクトは、各開発者のホスト名設定・管理を簡略化するために、`hostctl`というツールを使用したスクリプトです。
 
-- hostctlのインストール
+`hostctl`の詳細については、[GitHubリポジトリ](https://github.com/guumaster/hostctl)を参照してください。
 
-https://guumaster.github.io/hostctl/docs/installation/ を参考にインストールしてください。
+## hostctlのインストール
 
-macOSにおいてHomebrewでインストールできることは確認済みです。
+### macOS
+Homebrewを使用してインストールできます。
+```bash
+brew install hostctl
+```
+
+### Windows
+Scoopを使用してインストールできます。
+```powershell
+scoop install hostctl
+```
+
+### その他の方法
+他の方法でインストールしたい場合は、公式ドキュメントを参照してください。
+[hostctl公式ドキュメント](https://guumaster.github.io/hostctl/docs/installation/)
 
 ## 使い方
 
