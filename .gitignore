@@ -1,0 +1,2 @@
+hostctl-profiles/*
+!hostctl-profiles/.gitkeep
