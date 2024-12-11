@@ -7,13 +7,13 @@
 ## hostctlのインストール
 
 ### macOS
-Homebrewを使用してインストールできます。
+[Homebrew](https://brew.sh/)を使用してインストールできます。
 ```bash
 brew install hostctl
 ```
 
 ### Windows
-Scoopを使用してインストールできます。
+[Scoop](https://scoop.sh/)を使用してインストールできます。
 ```powershell
 scoop install hostctl
 ```
