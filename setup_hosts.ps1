@@ -1,25 +1,25 @@
 # 管理者権限を確認中...
-Write-Host "Checking for Administrator privileges..."
+Write-Host "管理者権限を確認中..."
 
 # 管理者権限があるかを確認
 if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    Write-Host "Error: This script requires running as Administrator." -ForegroundColor Red
+    Write-Host "Error: 管理者権限が必要です。" -ForegroundColor Red
     exit 1
 } else {
-    Write-Host "Administrator privileges confirmed." -ForegroundColor Green
+    Write-Host "管理者権限が確認されました。" -ForegroundColor Green
 }
 
 # hostsファイルへの書き込み権限を確認中...
-Write-Host "Checking write access to the hosts file..."
+Write-Host "hostsファイルへの書き込み権限を確認中..."
 
 # hostsファイルへの書き込み権限を確認
 $hostsFile = "C:\Windows\System32\drivers\etc\hosts"
 try {
     $stream = [System.IO.File]::OpenWrite($hostsFile)
     $stream.Close()
-    Write-Host "Write access to the hosts file confirmed." -ForegroundColor Green
+    Write-Host "hostsファイルへの書き込み権限が確認されました。" -ForegroundColor Green
 } catch {
-    Write-Host "Error: No write access to the hosts file." -ForegroundColor Red
+    Write-Host "Error: hostsファイルへの書き込み権限がありません。" -ForegroundColor Red
     exit 1
 }
 
@@ -35,18 +35,18 @@ Get-ChildItem -Path $EtcHostsDir -File | ForEach-Object {
     $ProfileName = $_.BaseName   # ファイル名から拡張子を除いたプロファイル名を取得
     $FilePath = $_.FullName      # ファイルのフルパス
     # プロファイルの作成コマンドを実行
-    Write-Host "Creating profile '$ProfileName' from $FilePath..."
+    Write-Host "プロファイル '$ProfileName' を $FilePath から作成中..."
     try {
         & hostctl add $ProfileName --from $FilePath
         if ($LASTEXITCODE -eq 0) {
-            Write-Host "Profile '$ProfileName' created successfully." -ForegroundColor Green
+            Write-Host "プロファイル '$ProfileName' が正常に作成されました。" -ForegroundColor Green
         } else {
-            Write-Host "Error: Failed to create profile '$ProfileName'." -ForegroundColor Red
+            Write-Host "Error: プロファイル '$ProfileName' の作成に失敗しました。" -ForegroundColor Red
             exit 1
         }
     } catch {
-        Write-Host "Error: Failed to create profile '$ProfileName'." -ForegroundColor Red
+        Write-Host "Error: プロファイル '$ProfileName' の作成に失敗しました。" -ForegroundColor Red
         exit 1
     }
 }
-Write-Host "All profiles have been successfully created." -ForegroundColor Green
+Write-Host "すべてのプロファイルが正常に作成されました。" -ForegroundColor Green
