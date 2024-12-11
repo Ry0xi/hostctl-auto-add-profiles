@@ -55,6 +55,21 @@ Copy-Item -Path "C:\Windows\System32\drivers\etc\hosts" -Destination "C:\Windows
 1. 任意のシェルを起動して、スクリプトがあるディレクトリに移動する
 2. `./setup_hosts.sh` を実行する（sudoを実行しているのでパスワード入力が必要になる可能性あり）
 
+実行時のログの例
+
+```
+❯ ./setup_hosts.sh
+プロファイル 'example' を hostctl-profiles/example から作成中
++---------+--------+-----------+----------------+
+| PROFILE | STATUS |    IP     |     DOMAIN     |
++---------+--------+-----------+----------------+
+| example | on     | 127.0.0.1 | my-localhost   |
+| example | on     | 127.0.0.2 | my-localhost-2 |
++---------+--------+-----------+----------------+
+
+すべてのプロファイルが正常に作成されました。
+```
+
 ### WindowsユーザーでWSL2上のLinuxを利用している場合
 
 1. 管理者権限でPowerShellを起動して、スクリプトがあるディレクトリに移動する
